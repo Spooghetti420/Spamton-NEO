@@ -3,7 +3,16 @@ This project is an attempt at porting the spectacular Spamton NEO boss fight fro
 Hopefully this makes for a fun thing to do online :)
 
 # Setup
-If you want to run this on your own computer/server, all you need is a way to host a local web server. I would recommend the "Live Server" extension for Visual Studio Code, but any method to achieve this setup will work. I haven't included the `p5.js` and `p5.sound.min.js` files in this repo, as they realistically don't represent my code and don't belong here. For development purposes, it is more convenient to have them available in the local directory, though, so you can download the `p5` libraries like so:
+If you want to run this on your own computer/server, you'll first need a way to host a local web server. I would recommend the "Live Server" extension for Visual Studio Code, but any method to achieve this setup will work. 
+
+## Typescript
+To build this project from source, you will need to have access to the TypeScript compiler. If you have `npm` installed, run `npm install -g typescript`.
+To set up the necessary node modules as well, do `npm install --save-dev @types/p5` and `npm install p5`.
+With that, the dependencies should be configured and the webserver ready to launch!
+
+## Note on p5.js
+
+I haven't included the `p5.js` and `p5.sound.min.js` files referenced in `index.html` in this repo, as they are external dependencies and just pollute the repo. For development purposes, it is more convenient to have them available in the local directory, though, so you can download the `p5` libraries like so:
 
 `curl https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js > p5.js`
 

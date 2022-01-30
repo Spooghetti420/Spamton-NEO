@@ -1,0 +1,3 @@
+# Spamton NEO — Web version
+This project is an attempt at porting the spectacular Spamton NEO boss fight from Delatarune to the web, thus allowing you to enter close combat with the deceptive, oleaginous grifter himself without having to play through the game all the way to him, nor shoulder through the infamous basement challenge before you get to the boss fight.
+Hopefully this makes for a fun thing to do online :)

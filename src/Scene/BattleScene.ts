@@ -1,0 +1,4 @@
+class BattleScene extends Scene 
+{
+        
+}

@@ -1,0 +1,4 @@
+class OverworldScene extends Scene 
+{
+    
+}

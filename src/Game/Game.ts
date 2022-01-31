@@ -24,6 +24,11 @@ class Game
         Game.instance.eventQueue.push(event);
     }
 
+    static ChangeScene(newScene: Scene) {
+        Game.instance.currentScene = newScene;
+        newScene.init();
+    }
+
     private static nextFrame() {
         // this.currentScene.nextFrame();
         Game.instance.eventQueue.forEach(event => {

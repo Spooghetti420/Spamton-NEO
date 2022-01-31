@@ -1,7 +1,10 @@
 abstract class Scene 
 {
-    helloWorld() {
-        console.log("Helloo world again!")
-    }
+    protected camera: Camera;
+    public abstract init(): void;
+    public abstract update(): void;
 
+    constructor() {
+        this.camera = new Camera();
+    }
 }

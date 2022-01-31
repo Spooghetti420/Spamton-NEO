@@ -3,15 +3,15 @@
     // enabling the VSCode build tasks "tsc: build" and "tsc: watch".
     "compilerOptions": {
       "module": "commonjs",
-      "lib": ["dom", "es5"],
+      "lib": ["dom", "es2015"],
       "allowJs": true,
       "checkJs": true,
-      "types": ["p5/global"],
+      "types": ["p5/global", "p5/index"],
       "noImplicitAny": true,
       "noImplicitThis": true,
       "strictNullChecks": true,
       "strictFunctionTypes": true,
-      "target": "ES2021",            // Compatible with older browsers
+      "target": "es2015",            // Compatible with older browsers
       "moduleResolution": "node", // Tell tsc to look in node_modules for modules
       "sourceMap": false,          // Creates *.js.map files
       "jsx": "react",             // Causes inline XML (JSX code) to be expanded

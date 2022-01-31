@@ -1,11 +1,5 @@
-abstract class Sprite 
+abstract class Sprite
 {
-    protected constructor() {
-
-    }
-
-    protected DoAfter(frames: number) 
-    {
-
-    }
+    public abstract draw(): void;
+    public abstract update(): void;
 }

@@ -6,6 +6,7 @@ without the right automation. This is the easiest way to only copy the files tha
 and not worry about junk JavaScript files.
 Something annoying is the importance of the load order of scripts: they must be defined in the correct order so as to
 work properly, otherwise they will not load as intended and some names will be unavailable when needed.
+Otherwise, I would just have this script directly alter the file.
 """
 
 import re

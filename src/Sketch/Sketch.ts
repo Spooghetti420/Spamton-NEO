@@ -11,13 +11,12 @@ abstract class Sketch {
         frameRate(30);
         background(0);
         Game.AddEvent(
-            OnFrame(50, ()=>{console.log(`Hello world! Current frame count is ${Game.GetFrameCount()}` )})
+            OnFrame(100, ()=>{console.log(`Hello world! Current frame count is ${Game.GetFrameCount()}` )})
         )
     }
 
     static draw(): void 
     {
-        console.log(frameCount);
         Game.Update();
     }
 

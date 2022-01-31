@@ -1,16 +1,16 @@
-class GameEvent 
+class GameEvent
 {
     /*
         Represents a game event, i.e. some action that occurs after a given predicate is met.
         Once the condition is met, the action can be executed.
         This is used to schedule events that occur given common types of conditiions,
         e.g. after a certain number of frames, after a certain animation has completed, etc.
-        
+
     */
-   
-    private condition: CallableFunction;
-    private payload: CallableFunction;
-    private complete: boolean;
+
+    protected condition: CallableFunction;
+    protected payload: CallableFunction;
+    protected complete: boolean;
 
     constructor(condition: CallableFunction, payload: CallableFunction)
     {

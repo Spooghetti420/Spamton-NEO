@@ -1,3 +1,6 @@
+import { Game } from "../Game/Game.js";
+import { OnFrame } from "../GameEvent/FrameEvent.js";
+
 abstract class Sketch {
 
     static preload(): void 
@@ -21,3 +24,5 @@ abstract class Sketch {
     }
 
 }
+
+export { Sketch }

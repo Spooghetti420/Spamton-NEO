@@ -1,3 +1,5 @@
+import { Camera } from "../Framework/Camera.js";
+
 abstract class Scene 
 {
     protected camera: Camera;
@@ -8,3 +10,5 @@ abstract class Scene
         this.camera = new Camera();
     }
 }
+
+export { Scene }

@@ -1,15 +1,24 @@
-// Using p5.js to manage the canvas, etc.
-function preload() 
+import { Sketch } from "./Sketch/Sketch.js";
+
+
+// Hack to allow overriding nonexistent window properties
+interface p5Window extends Window 
 {
+    preload: CallableFunction,
+    setup: CallableFunction,
+    draw: CallableFunction
+}
+declare let window: p5Window;
+
+// Using p5.js to manage the canvas, etc.
+window.preload = function () {
     Sketch.preload();
 }
 
-function setup() 
-{
+window.setup = function() {
     Sketch.setup();
 }
 
-function draw() 
-{
+window.draw = function () {
     Sketch.draw();
 }

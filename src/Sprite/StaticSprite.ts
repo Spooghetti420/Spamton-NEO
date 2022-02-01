@@ -1,3 +1,5 @@
+import { Sprite } from "./Sprite.js";
+
 class StaticSprite extends Sprite
 {
     /* 
@@ -5,8 +7,8 @@ class StaticSprite extends Sprite
         Its draw function is generally always the same, just with a different image used.
     */
 
-    private readonly x: number;
-    private readonly y: number;
+    protected readonly x: number;
+    protected readonly y: number;
 
     constructor(x: number, y: number) 
     {
@@ -18,3 +20,5 @@ class StaticSprite extends Sprite
     update() {}
     draw() {}
 }
+
+export { StaticSprite }

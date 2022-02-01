@@ -1,10 +1,12 @@
-import p5 = require("p5");
+// import * as p5 from "p5";
+import * as p5 from "p5";
 
-export class ResourceManager
+// 'ResourceManager' is declared but never used.
+class ResourceManager
 {
     private static sprites = new Map<string, p5.Image>();
     private static fonts = new Map<string, p5.Font>();
-    private　static sounds = new Map<string, p5.SoundFile>();
+    private static sounds = new Map<string, p5.SoundFile>();
 
     static getSprite(resourceName: string): p5.Image | undefined
     {
@@ -48,3 +50,5 @@ export class ResourceManager
         return ResourceManager.sounds.get(resourceName)!;
     }
 }
+
+export { ResourceManager };

@@ -34,3 +34,5 @@ class GameEvent
     }
 
 }
+
+export { GameEvent }

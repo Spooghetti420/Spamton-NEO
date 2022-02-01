@@ -34,6 +34,6 @@ with open("index.html", encoding="utf-8", mode="r") as index:
     root_files.sort(key = lambda k: len(k))
     javascript_files.extend(root_files)
 
-    script_tags = "    " + "\n    ".join([f'<script src="{file}"></script>' for file in javascript_files])
+    script_tags = "    " + "\n    ".join([f'<script type="module" src="{file}"></script>' for file in javascript_files])
 
     print(script_tags)

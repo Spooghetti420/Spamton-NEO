@@ -2,24 +2,19 @@
     // compiler (tsc) and makes VSCode recognize this folder as a TS project,
     // enabling the VSCode build tasks "tsc: build" and "tsc: watch".
     "compilerOptions": {
-      "module": "commonjs",
+      "module": "ES2015",
       "lib": ["dom", "es2015"],
       "allowJs": true,
       "checkJs": true,
       "types": ["p5/global", "p5/index"],
-      "noImplicitAny": true,
-      "noImplicitThis": true,
-      "strictNullChecks": true,
-      "strictFunctionTypes": true,
-      "target": "es2015",            // Compatible with older browsers
-      "moduleResolution": "node", // Tell tsc to look in node_modules for modules
+      "target": "es5",            // Compatible with older browsers
+      "moduleResolution": "Node", // Tell tsc to look in node_modules for modules
       "sourceMap": false,          // Creates *.js.map files
-      "jsx": "react",             // Causes inline XML (JSX code) to be expanded
       "strict": true,             // Strict types, eg. prohibits `var x=0; x=null`
       "alwaysStrict": true,        // Enable JavaScript's "use strict" mode
       "outDir": "dist",
       "rootDir": "src",
-      "noEmitOnError": true
+      "noEmitOnError": false
     },
     "include": ["**/*.ts"],
     "exclude": ["node_modules"]

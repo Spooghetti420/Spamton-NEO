@@ -9,3 +9,5 @@ class Camera
         this.y = y;
     }
 }
+
+export { Camera }

@@ -1,3 +1,7 @@
+import { GameEvent } from "../GameEvent/GameEvent.js";
+import { OverworldScene } from "../Scene/OverworldScene.js";
+import { Scene } from "../Scene/Scene.js";
+
 class Game 
 {
     private static instance: Game = new Game();
@@ -12,26 +16,37 @@ class Game
         this.eventQueue = [];
     }
 
-    static Update() {
+    static Update()
+    {
         Game.nextFrame();
     }
 
-    static GetFrameCount() {
+    static GetFrameCount()
+    {
         return Game.instance.frameCount;
     }
 
-    static AddEvent(event: GameEvent) {
+    static AddEvent(event: GameEvent)
+    {
         Game.instance.eventQueue.push(event);
     }
 
-    static ChangeScene(newScene: Scene) {
+    static CurrentScene() 
+    {
+        return Game.instance.currentScene;
+    }
+
+    static ChangeScene(newScene: Scene)
+    {
         Game.instance.currentScene = newScene;
         newScene.init();
     }
 
-    private static nextFrame() {
+    private static nextFrame()
+    {
         // this.currentScene.nextFrame();
-        Game.instance.eventQueue.forEach(event => {
+        Game.instance.eventQueue.forEach(event => 
+        {
             event.run();
             if (event.IsComplete())
             Game.instance.eventQueue.splice(Game.instance.eventQueue.indexOf(event), 1);
@@ -39,3 +54,5 @@ class Game
         Game.instance.frameCount++;
     }
 }
+
+export { Game }

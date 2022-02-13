@@ -1,6 +1,6 @@
 import { Camera } from "../Framework/Camera.js";
 
-abstract class Scene 
+export abstract class Scene 
 {
     protected camera: Camera;
     public abstract init(): void;
@@ -16,5 +16,3 @@ abstract class Scene
     }
     
 }
-
-export { Scene }

@@ -1,6 +1,6 @@
 import * as p5 from "p5";
 
-class ResourceManager
+export class ResourceManager
 {
     private static sprites = new Map<string, p5.Image>();
     private static fonts = new Map<string, p5.Font>();
@@ -48,5 +48,3 @@ class ResourceManager
         return ResourceManager.sounds.get(resourceName)!;
     }
 }
-
-export { ResourceManager };

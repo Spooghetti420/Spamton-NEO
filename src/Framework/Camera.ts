@@ -1,4 +1,4 @@
-class Camera 
+export class Camera 
 {
     public x: number;
     public y: number;
@@ -9,5 +9,3 @@ class Camera
         this.y = y;
     }
 }
-
-export { Camera }

@@ -1,7 +1,7 @@
 import { Game } from "../Game/Game.js";
 import { Sprite } from "./Sprite.js";
 
-class StaticSprite extends Sprite
+export class StaticSprite extends Sprite
 {
     /* 
         Represents a sprite that will not move during its lifetime.
@@ -21,5 +21,3 @@ class StaticSprite extends Sprite
     update(game: Game) {}
     draw(game: Game) {}
 }
-
-export { StaticSprite }

@@ -1,6 +1,6 @@
 import { StaticSprite } from "./StaticSprite.js";
 
-class Background extends StaticSprite
+export class Background extends StaticSprite
 {
     draw() 
     {

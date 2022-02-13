@@ -1,6 +1,6 @@
 import { Scene } from "./Scene.js";
 
-class BattleScene extends Scene 
+export class BattleScene extends Scene 
 {
     init() {}
     update() {}

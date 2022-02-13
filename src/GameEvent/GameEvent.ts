@@ -1,4 +1,4 @@
-class GameEvent
+export class GameEvent
 {
     /*
         Represents a game event, i.e. some action that occurs after a given predicate is met.
@@ -34,5 +34,3 @@ class GameEvent
     }
 
 }
-
-export { GameEvent }

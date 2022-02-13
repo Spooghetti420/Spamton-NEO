@@ -27,5 +27,3 @@ export class OverworldScene extends Scene
         }
     }
 }
-
-// export { OverworldScene }

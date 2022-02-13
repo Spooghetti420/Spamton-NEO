@@ -1,6 +1,8 @@
 import { Game } from "../Game/Game.js";
 import { GameEvent } from "./GameEvent.js";
 
+export { OnFrame, AfterNFrames, NextFrame, FrameEvent }
+
 class FrameEvent extends GameEvent
 {
     /*
@@ -30,8 +32,7 @@ function AfterNFrames(n: number, payload: CallableFunction)
     return new FrameEvent(n + Game.GetFrameCount(), payload);
 }
 
-function NextFrame(payload: CallableFunction) {
+function NextFrame(payload: CallableFunction)
+{
     return new FrameEvent(1 + Game.GetFrameCount(), payload);
 }
-
-export { OnFrame, AfterNFrames, NextFrame, FrameEvent }

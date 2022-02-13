@@ -8,9 +8,9 @@ interface p5Window extends Window
     setup: CallableFunction,
     draw: CallableFunction
 }
-declare let window: p5Window;
 
 // Using p5.js to manage the canvas, etc.
+declare let window: p5Window;
 window.preload = function () {
     Sketch.preload();
 }

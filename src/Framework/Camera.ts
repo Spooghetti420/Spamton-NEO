@@ -1,7 +1,7 @@
 class Camera 
 {
-    private x: number;
-    private y: number;
+    public x: number;
+    public y: number;
 
     constructor(x: number = 0, y: number = 0) 
     {

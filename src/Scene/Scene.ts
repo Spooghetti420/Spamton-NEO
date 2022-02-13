@@ -9,6 +9,12 @@ abstract class Scene
     constructor() {
         this.camera = new Camera();
     }
+
+    GetPositionRelativeToCamera(x: number, y: number)
+    {
+        return [x - this.camera.x, y - this.camera.y]; 
+    }
+    
 }
 
 export { Scene }

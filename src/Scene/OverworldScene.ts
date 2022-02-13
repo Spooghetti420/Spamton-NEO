@@ -1,7 +1,8 @@
+import { Game } from "../Game/Game.js";
 import { Rail } from "../Sprite/Rail.js";
 import { Scene } from "./Scene.js";
 
-class OverworldScene extends Scene 
+export class OverworldScene extends Scene 
 {
     private readonly rails: Rail[] = []; 
     init() 
@@ -15,11 +16,16 @@ class OverworldScene extends Scene
     
     update() 
     {
+        if (keyIsDown(RIGHT_ARROW)) {
+            this.camera.x += 5;
+        } else if (keyIsDown(LEFT_ARROW)) {
+            this.camera.x -= 5;
+        }
         for (let rail of this.rails) 
         {
-            rail.draw();
+            rail.draw(Game.Get());
         }
     }
 }
 
-export { OverworldScene }
+// export { OverworldScene }

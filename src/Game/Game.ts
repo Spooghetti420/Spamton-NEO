@@ -12,13 +12,14 @@ class Game
 
     private constructor() {
         this.currentScene = new OverworldScene();
+        this.currentScene.init();
         this.frameCount = 1;
         this.eventQueue = [];
     }
 
     static Update()
     {
-        Game.nextFrame();
+        Game.instance.nextFrame();
     }
 
     static GetFrameCount()
@@ -42,16 +43,20 @@ class Game
         newScene.init();
     }
 
-    private static nextFrame()
+    static Get() {
+        return Game.instance;
+    }
+
+    private nextFrame()
     {
-        // this.currentScene.nextFrame();
-        Game.instance.eventQueue.forEach(event => 
+        this.currentScene.update();
+        this.eventQueue.forEach(event => 
         {
             event.run();
             if (event.IsComplete())
-            Game.instance.eventQueue.splice(Game.instance.eventQueue.indexOf(event), 1);
+            this.eventQueue.splice(this.eventQueue.indexOf(event), 1);
         });
-        Game.instance.frameCount++;
+        this.frameCount++;
     }
 }
 

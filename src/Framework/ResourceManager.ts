@@ -1,7 +1,5 @@
-// import * as p5 from "p5";
 import * as p5 from "p5";
 
-// 'ResourceManager' is declared but never used.
 class ResourceManager
 {
     private static sprites = new Map<string, p5.Image>();

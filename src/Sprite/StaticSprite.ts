@@ -1,4 +1,3 @@
-import { Game } from "../Game/Game.js";
 import { Sprite } from "./Sprite.js";
 
 export class StaticSprite extends Sprite
@@ -18,6 +17,6 @@ export class StaticSprite extends Sprite
         this.y = y;
     }
 
-    update(game: Game) {}
-    draw(game: Game) {}
+    update() {}
+    draw() {}
 }

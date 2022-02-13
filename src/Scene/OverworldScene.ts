@@ -1,17 +1,18 @@
-import { Game } from "../Game/Game.js";
+import { Kris } from "../Sprite/Kris.js";
 import { Rail } from "../Sprite/Rail.js";
 import { Scene } from "./Scene.js";
 
 export class OverworldScene extends Scene 
 {
     private readonly rails: Rail[] = []; 
+    private player = new Kris();
     init() 
     {
         for (let i = 0; i < 2; i++) {
             for (let j = 0; j < 3; j++) {
                 this.rails.push(new Rail(640 * i, 180 + 60 * j));
             }
-          }
+        }
     }
     
     update() 
@@ -23,7 +24,8 @@ export class OverworldScene extends Scene
         }
         for (let rail of this.rails) 
         {
-            rail.draw(Game.Get());
+            rail.draw();
         }
+        this.player.draw();
     }
 }

@@ -1,8 +1,8 @@
 import { GameEvent } from "../GameEvent/GameEvent.js";
-import { OverworldScene } from "../Scene/OverworldScene.js";
+import { DummyScene } from "../Scene/DummyScene.js";
 import { Scene } from "../Scene/Scene.js";
 
-class Game 
+export class Game 
 {
     private static instance: Game = new Game();
 
@@ -11,8 +11,7 @@ class Game
     private eventQueue: GameEvent[] = [];
 
     private constructor() {
-        this.currentScene = new OverworldScene();
-        this.currentScene.init();
+        this.currentScene = new DummyScene();
         this.frameCount = 1;
         this.eventQueue = [];
     }
@@ -49,6 +48,8 @@ class Game
 
     private nextFrame()
     {
+        if (!this.currentScene)
+            return
         this.currentScene.update();
         this.eventQueue.forEach(event => 
         {
@@ -59,5 +60,3 @@ class Game
         this.frameCount++;
     }
 }
-
-export { Game }

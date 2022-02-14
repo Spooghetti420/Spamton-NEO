@@ -1,3 +1,4 @@
+import { KeyboardManager } from "../Framework/KeyboardManager.js";
 import { GameEvent } from "../GameEvent/GameEvent.js";
 import { DummyScene } from "../Scene/DummyScene.js";
 import { Scene } from "../Scene/Scene.js";
@@ -18,6 +19,7 @@ export class Game
 
     static Update()
     {
+        KeyboardManager.update();
         Game.instance.nextFrame();
     }
 

@@ -6,7 +6,7 @@ export class ResourceManager
     private static fonts = new Map<string, p5.Font>();
     private static sounds = new Map<string, p5.SoundFile>();
 
-    static getSprite(resourceName: string): p5.Image | undefined
+    static getSprite(resourceName: string): p5.Image
     {
         if (!ResourceManager.sprites.has(resourceName))
             try 
@@ -20,7 +20,7 @@ export class ResourceManager
         return ResourceManager.sprites.get(resourceName)!;
     }
 
-    static getFont(resourceName: string): p5.Font | undefined 
+    static getFont(resourceName: string): p5.Font 
     {
         if (!ResourceManager.fonts.has(resourceName))
             try 
@@ -34,7 +34,7 @@ export class ResourceManager
         return ResourceManager.fonts.get(resourceName)!;
     }
 
-    static getSound(resourceName: string): p5.SoundFile | undefined 
+    static getSound(resourceName: string): p5.SoundFile 
     {
         if (!ResourceManager.sounds.has(resourceName))
             try 

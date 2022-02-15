@@ -8,8 +8,10 @@ export class Kris extends Sprite {
 
     public x: number;
     public y: number;
+    public canMove: boolean;
     private facing: FacingDirection;
     private walkPhase: number;
+    private walkAnimationTimer: number;
     private static readonly BASE_SPEED = 4; // Initial speed without holding shift
     private static readonly RUN_SPEED = 6; // Speed after holding shift
     private static readonly SPRINT_SPEED = 7; // Speed after holding shift for 10 frames (1/3 second)
@@ -21,12 +23,15 @@ export class Kris extends Sprite {
         super();
         this.x = 400;
         this.y = 200;
+        this.canMove = true;
         this.facing = FacingDirection.UP;
         this.walkPhase = 0;
+        this.walkAnimationTimer = 0;
     }
 
-    static getMoveSpeed() 
+    getMoveSpeed() 
     {
+        if (!this.canMove) return 0;
         let moveSpeed = Kris.BASE_SPEED;
         if (KeyboardManager.KeyHoldDuration(SHIFT) >= 60)
             moveSpeed = Kris.MAX_SPEED
@@ -40,12 +45,14 @@ export class Kris extends Sprite {
     public makeMove(): number[]
     {
         /* This method is also used by the OverworldScene to determine
-           whether the screen should scroll when the player reaches the wall. 
+           whether the screen should scroll when the player reaches the wall.
+           Returns a vector consisting of [dx, dy], which is the amount by
+           which the player should move the current frame.
         */
-        const moveSpeed = Kris.getMoveSpeed();
+        const moveSpeed = this.getMoveSpeed();
         let dx: number = 0;
         let dy: number = 0;
-        
+
         if (KeyboardManager.KeyIsHeld(RIGHT_ARROW)) {
             dx = moveSpeed;
             if (this.x + dx > 1240)
@@ -70,8 +77,60 @@ export class Kris extends Sprite {
         return [dx, dy];
     }
 
+    private orientate(): void
+    {
+        // Updates the player's direction and animation frame.
+        const prevDirection = this.facing;
+        if (KeyboardManager.KeyIsHeld(RIGHT_ARROW)) {
+            if (!KeyboardManager.KeyIsHeld(UP_ARROW)
+                && !KeyboardManager.KeyIsHeld(DOWN_ARROW))
+            {
+                this.facing = FacingDirection.RIGHT;
+            }
+        } else if (KeyboardManager.KeyIsHeld(LEFT_ARROW)) {
+            if (!KeyboardManager.KeyIsHeld(UP_ARROW)
+                && !KeyboardManager.KeyIsHeld(DOWN_ARROW))
+            {
+                this.facing = FacingDirection.LEFT;
+            }
+        }
+
+        if (KeyboardManager.KeyIsHeld(UP_ARROW)) {
+            if (!KeyboardManager.KeyIsHeld(RIGHT_ARROW)
+                && !KeyboardManager.KeyIsHeld(LEFT_ARROW))
+            {
+                this.facing = FacingDirection.UP;
+            }
+        } else if (KeyboardManager.KeyIsHeld(DOWN_ARROW)) {
+            if (!KeyboardManager.KeyIsHeld(RIGHT_ARROW)
+                && !KeyboardManager.KeyIsHeld(LEFT_ARROW))
+            {
+                this.facing = FacingDirection.DOWN;
+            }            
+        }
+    }
+
+    private walkAnimation(): void 
+    {
+        if (this.facing === FacingDirection.RIGHT && KeyboardManager.KeyIsHeld(RIGHT_ARROW)
+            || this.facing === FacingDirection.LEFT && KeyboardManager.KeyIsHeld(LEFT_ARROW)
+            || this.facing === FacingDirection.UP && KeyboardManager.KeyIsHeld(UP_ARROW)
+            || this.facing === FacingDirection.DOWN && KeyboardManager.KeyIsHeld(DOWN_ARROW))
+        {
+            this.walkAnimationTimer++;
+            if (this.walkAnimationTimer >= 4)
+            {
+                this.walkPhase++;
+                this.walkPhase %= 3;
+                this.walkAnimationTimer = 0;
+            }
+        }
+    }
+
     update()
     {
+        this.orientate();
+        this.walkAnimation();
         const movement = this.makeMove();
         this.x += movement[0];
         this.y += movement[1];

@@ -1,3 +1,5 @@
+import { Game } from "../Game/Game.js";
+import { GameEvent } from "../GameEvent/GameEvent.js";
 import { Background } from "../Sprite/Background.js";
 import { Kris } from "../Sprite/Kris.js";
 import { Rail } from "../Sprite/Rail.js";
@@ -5,15 +7,27 @@ import { Scene } from "./Scene.js";
 
 export class OverworldScene extends Scene 
 {
-    private readonly rails: Rail[] = []; 
+    private readonly rails: Rail[] = [];
     private player = new Kris();
-    init() 
+    init()
     {
         for (let i = 0; i < 2; i++) {
             for (let j = 0; j < 3; j++) {
                 this.rails.push(new Rail(640 * i, 180 + 60 * j));
             }
         }
+        Game.AddEvent(
+            // Spamton mock encounter
+            new GameEvent(
+                () => {
+                    return this.player.x < 180
+                },
+                () => {
+                    this.player.canMove = false;
+                }
+                
+            )
+        )
     }
 
     private scroll(): void

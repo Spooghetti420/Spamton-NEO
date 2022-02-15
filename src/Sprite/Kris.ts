@@ -6,8 +6,8 @@ import { Sprite } from "./Sprite.js";
 
 export class Kris extends Sprite {
 
-    private x: number;
-    private y: number;
+    public x: number;
+    public y: number;
     private facing: FacingDirection;
     private walkPhase: number;
     private static readonly BASE_SPEED = 4; // Initial speed without holding shift
@@ -37,20 +37,44 @@ export class Kris extends Sprite {
         return moveSpeed;
     }
 
-    update()
+    public makeMove(): number[]
     {
+        /* This method is also used by the OverworldScene to determine
+           whether the screen should scroll when the player reaches the wall. 
+        */
         const moveSpeed = Kris.getMoveSpeed();
+        let dx: number = 0;
+        let dy: number = 0;
+        
         if (KeyboardManager.KeyIsHeld(RIGHT_ARROW)) {
-            this.x += moveSpeed;
+            dx = moveSpeed;
+            if (this.x + dx > 1240)
+                // If the base speed is within bounds but the sprint is not, then move by the base speed instead. 
+                dx = (this.x + Kris.BASE_SPEED > 1240) ? 0 : Kris.BASE_SPEED;
         } else if (KeyboardManager.KeyIsHeld(LEFT_ARROW)) {
-            this.x -= moveSpeed;
+            dx = -moveSpeed;
+            if (this.x + dx < 0)
+                dx = (this.x - Kris.BASE_SPEED < 0) ? 0 : -Kris.BASE_SPEED;
         }
 
         if (KeyboardManager.KeyIsHeld(UP_ARROW)) {
-            this.y -= moveSpeed;
+            dy = -moveSpeed;
+            if (this.y + dy < 160)
+                dy = (this.y - Kris.BASE_SPEED < 160) ? 0 : -Kris.BASE_SPEED;
         } else if (KeyboardManager.KeyIsHeld(DOWN_ARROW)) {
-            this.y += moveSpeed;
+            dy = moveSpeed;
+            if (this.y + dy > 320)
+                dy = (this.y + Kris.BASE_SPEED > 320) ? 0 : Kris.BASE_SPEED;
         }
+
+        return [dx, dy];
+    }
+
+    update()
+    {
+        const movement = this.makeMove();
+        this.x += movement[0];
+        this.y += movement[1];
     }
 
     draw()

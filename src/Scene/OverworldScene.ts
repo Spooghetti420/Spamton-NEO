@@ -15,15 +15,23 @@ export class OverworldScene extends Scene
             }
         }
     }
+
+    private scroll(): void
+    {
+        const scrollAmount = this.player.makeMove()[0]; // Get x value from player movement
+        // const scrollOffset = this.camera.x - this.player.x;
+        // if (keyIsDown(RIGHT_ARROW) && (this.player.x > 240 || this.player.x < 1080)) {
+        //     this.camera.x += playerSpeed;
+        // } else if (keyIsDown(LEFT_ARROW) && (this.player.x < 240 || this.player.x > 1080)) {
+        //     this.camera.x -= playerSpeed;
+        // }
+        if (this.player.x > 320 && this.player.x < 1120)
+            this.camera.x += scrollAmount;
+    }
     
     update() 
     {
-        const playerSpeed = Kris.getMoveSpeed();
-        if (keyIsDown(RIGHT_ARROW)) {
-            this.camera.x += playerSpeed;
-        } else if (keyIsDown(LEFT_ARROW)) {
-            this.camera.x -= playerSpeed;
-        }
+        this.scroll();
         Background.draw();
         for (let rail of this.rails) 
         {

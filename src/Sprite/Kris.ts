@@ -15,7 +15,9 @@ export class Kris extends Sprite {
     private static readonly BASE_SPEED = 4; // Initial speed without holding shift
     private static readonly RUN_SPEED = 6; // Speed after holding shift
     private static readonly SPRINT_SPEED = 7; // Speed after holding shift for 10 frames (1/3 second)
-    private static readonly MAX_SPEED = 8;
+    private static readonly MAX_SPEED = 8; // Speed after holding shift for 60 frames (2 seconds)
+    private static readonly WALK_FRAMES = 6; // Number of frames before the walking animation changes
+    private static readonly WALK_FRAMES_SPRINT = 4; // Same as above, but applied when sprinting
 
 
     constructor() 
@@ -80,51 +82,45 @@ export class Kris extends Sprite {
     private orientate(): void
     {
         // Updates the player's direction and animation frame.
-        const prevDirection = this.facing;
-        if (KeyboardManager.KeyIsHeld(RIGHT_ARROW)) {
-            if (!KeyboardManager.KeyIsHeld(UP_ARROW)
-                && !KeyboardManager.KeyIsHeld(DOWN_ARROW))
-            {
-                this.facing = FacingDirection.RIGHT;
-            }
-        } else if (KeyboardManager.KeyIsHeld(LEFT_ARROW)) {
-            if (!KeyboardManager.KeyIsHeld(UP_ARROW)
-                && !KeyboardManager.KeyIsHeld(DOWN_ARROW))
-            {
-                this.facing = FacingDirection.LEFT;
-            }
-        }
+        const movement = this.makeMove();
 
-        if (KeyboardManager.KeyIsHeld(UP_ARROW)) {
-            if (!KeyboardManager.KeyIsHeld(RIGHT_ARROW)
-                && !KeyboardManager.KeyIsHeld(LEFT_ARROW))
-            {
-                this.facing = FacingDirection.UP;
-            }
-        } else if (KeyboardManager.KeyIsHeld(DOWN_ARROW)) {
-            if (!KeyboardManager.KeyIsHeld(RIGHT_ARROW)
-                && !KeyboardManager.KeyIsHeld(LEFT_ARROW))
-            {
-                this.facing = FacingDirection.DOWN;
-            }            
-        }
+        // Basic movements
+        if (KeyboardManager.KeyIsHeld(RIGHT_ARROW) && movement[1] === 0)
+            this.facing = FacingDirection.RIGHT
+        else if (KeyboardManager.KeyIsHeld(LEFT_ARROW) && movement[1] === 0)
+            this.facing = FacingDirection.LEFT
+
+        if (KeyboardManager.KeyIsHeld(UP_ARROW) && movement[0] === 0)
+            this.facing = FacingDirection.UP;
+        else if (KeyboardManager.KeyIsHeld(DOWN_ARROW) && movement[0] === 0)
+            this.facing = FacingDirection.DOWN;
+
+        // Backwardness correction (prevents you from moving backwards)
+        if (this.facing === FacingDirection.RIGHT && movement[0] < 0)
+            this.facing = FacingDirection.LEFT;
+        if (this.facing === FacingDirection.LEFT && movement[0] > 0)
+            this.facing = FacingDirection.RIGHT;
+        if (this.facing === FacingDirection.DOWN && movement[1] < 0)
+            this.facing = FacingDirection.UP;
+        if (this.facing === FacingDirection.UP && movement[1] > 0)
+            this.facing = FacingDirection.DOWN;
+
     }
 
     private walkAnimation(): void 
     {
-        if (this.facing === FacingDirection.RIGHT && KeyboardManager.KeyIsHeld(RIGHT_ARROW)
-            || this.facing === FacingDirection.LEFT && KeyboardManager.KeyIsHeld(LEFT_ARROW)
-            || this.facing === FacingDirection.UP && KeyboardManager.KeyIsHeld(UP_ARROW)
-            || this.facing === FacingDirection.DOWN && KeyboardManager.KeyIsHeld(DOWN_ARROW))
+        const movement = this.makeMove();
+        this.walkAnimationTimer++;
+        const animationThreshold = (KeyboardManager.KeyIsHeld(SHIFT)) ? Kris.WALK_FRAMES_SPRINT : Kris.WALK_FRAMES;
+        if (this.walkAnimationTimer >= animationThreshold) 
         {
-            this.walkAnimationTimer++;
-            if (this.walkAnimationTimer >= 4)
-            {
-                this.walkPhase++;
-                this.walkPhase %= 3;
-                this.walkAnimationTimer = 0;
-            }
+            this.walkAnimationTimer = 0;
+            if (movement[0] === 0 && movement[1] === 0) // Idle
+                this.walkPhase = 0;
+            else
+                this.walkPhase = (this.walkPhase + 1) % 4;
         }
+
     }
 
     update()
@@ -140,8 +136,11 @@ export class Kris extends Sprite {
     {
 
         const [relativeX, relativeY] = Game.CurrentScene()!.GetPositionRelativeToCamera(this.x, this.y);
+
+        const spriteNumber = [0, 1, 0, 2][this.walkPhase];
+
         image(
-            ResourceManager.getSprite("assets/spr/kris" + this.facing + "_" + this.walkPhase.toString() + ".png")!,
+            ResourceManager.getSprite("assets/spr/kris" + this.facing + "_" + spriteNumber + ".png")!,
             relativeX, relativeY
         );
     }

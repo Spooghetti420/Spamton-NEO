@@ -16,18 +16,18 @@ export class OverworldScene extends Scene
                 this.rails.push(new Rail(640 * i, 180 + 60 * j));
             }
         }
-        Game.AddEvent(
-            // Spamton mock encounter
-            new GameEvent(
-                () => {
-                    return this.player.x < 180
-                },
-                () => {
-                    this.player.canMove = false;
-                }
+        // Game.AddEvent(
+        //     // Spamton mock encounter
+        //     new GameEvent(
+        //         () => {
+        //             return this.player.x < 180
+        //         },
+        //         () => {
+        //             this.player.canMove = false;
+        //         }
                 
-            )
-        )
+        //     )
+        // )
     }
 
     private scroll(): void

@@ -1,3 +1,4 @@
+import { Camera } from "../Framework/Camera.js";
 import { Game } from "../Game/Game.js";
 import { GameEvent } from "../GameEvent/GameEvent.js";
 import { Background } from "../Sprite/Background.js";
@@ -9,6 +10,7 @@ export class OverworldScene extends Scene
 {
     private readonly rails: Rail[] = [];
     private player = new Kris();
+
     init()
     {
         for (let i = 0; i < 2; i++) {
@@ -33,13 +35,8 @@ export class OverworldScene extends Scene
     private scroll(): void
     {
         const scrollAmount = this.player.makeMove()[0]; // Get x value from player movement
-        // const scrollOffset = this.camera.x - this.player.x;
-        // if (keyIsDown(RIGHT_ARROW) && (this.player.x > 240 || this.player.x < 1080)) {
-        //     this.camera.x += playerSpeed;
-        // } else if (keyIsDown(LEFT_ARROW) && (this.player.x < 240 || this.player.x > 1080)) {
-        //     this.camera.x -= playerSpeed;
-        // }
-        if (this.player.x > 320 && this.player.x < 1120)
+
+        if (this.player.x > 240 && this.player.x < 1020)
             this.camera.x += scrollAmount;
     }
     

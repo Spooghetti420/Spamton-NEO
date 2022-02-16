@@ -23,7 +23,7 @@ export class Kris extends Sprite {
     constructor() 
     {
         super();
-        this.x = 400;
+        this.x = 320;
         this.y = 200;
         this.canMove = true;
         this.facing = FacingDirection.UP;

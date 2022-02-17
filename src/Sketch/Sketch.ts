@@ -1,5 +1,6 @@
 import { ResourceManager } from "../Framework/ResourceManager.js";
 import { Game } from "../Game/Game.js";
+import { LanguageSelectScene } from "../Scene/LanguageSelectScene.js";
 import { OverworldScene } from "../Scene/OverworldScene.js";
 
 export abstract class Sketch {
@@ -18,8 +19,10 @@ export abstract class Sketch {
         ResourceManager.getSprite("assets/spr/krisr_0.png");
         ResourceManager.getSprite("assets/spr/krisl_2.png");
         ResourceManager.getSprite("assets/spr/font.png");
+        ResourceManager.getSprite("assets/spr/flag-jp.png");
         ResourceManager.getSprite("assets/spr/textbox_topleft_6.png");
         ResourceManager.getSprite("assets/spr/krisl_1.png");
+        ResourceManager.getSprite("assets/spr/flag-us.png");
         ResourceManager.getSprite("assets/spr/textbox_topleft_4.png");
         ResourceManager.getSprite("assets/spr/textbox_topleft_3.png");
         ResourceManager.getSprite("assets/spr/krisu_2.png");
@@ -50,15 +53,15 @@ export abstract class Sketch {
 
     static setup(): void 
     {
-        Game.ChangeScene(new OverworldScene());
+        Game.ChangeScene(new LanguageSelectScene());
         createCanvas(640, 480);
         frameRate(30);
     }
 
     static draw(): void 
     {
-        background(0);
         Game.Update();
     }
+
 
 }

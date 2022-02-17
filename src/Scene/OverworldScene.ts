@@ -42,6 +42,8 @@ export class OverworldScene extends Scene
     
     update() 
     {
+        background(0);
+        
         this.scroll();
         Background.draw();
         for (let rail of this.rails) 

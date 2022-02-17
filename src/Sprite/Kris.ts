@@ -1,4 +1,4 @@
-import { FacingDirection } from "../Framework/FacingDirection.js";
+import { FacingDirection } from "../Framework/Enumarable/FacingDirection.js";
 import { KeyboardManager } from "../Framework/KeyboardManager.js";
 import { ResourceManager } from "../Framework/ResourceManager.js";
 import { Game } from "../Game/Game.js";

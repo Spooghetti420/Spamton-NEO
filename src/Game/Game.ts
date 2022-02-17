@@ -1,4 +1,6 @@
+import { Languages } from "../Framework/Enumarable/Language.js";
 import { KeyboardManager } from "../Framework/KeyboardManager.js";
+import { MouseManager } from "../Framework/MouseManager.js";
 import { GameEvent } from "../GameEvent/GameEvent.js";
 import { DummyScene } from "../Scene/DummyScene.js";
 import { Scene } from "../Scene/Scene.js";
@@ -10,6 +12,7 @@ export class Game
     private currentScene: Scene
     private frameCount: number
     private eventQueue: GameEvent[] = [];
+    private language: Languages = Languages.ENGLISH;
 
     private constructor() {
         this.currentScene = new DummyScene();
@@ -20,6 +23,7 @@ export class Game
     static Update()
     {
         KeyboardManager.update();
+        MouseManager.update();
         Game.instance.nextFrame();
     }
 
@@ -46,6 +50,11 @@ export class Game
 
     static Get() {
         return Game.instance;
+    }
+
+    static SetLanguage(language: Languages)
+    {
+        Game.instance.language = language;
     }
 
     private nextFrame()

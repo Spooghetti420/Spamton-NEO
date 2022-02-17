@@ -1,6 +1,7 @@
 import { Languages } from "../Framework/Enumarable/Language.js";
 import { KeyboardManager } from "../Framework/KeyboardManager.js";
 import { MouseManager } from "../Framework/MouseManager.js";
+import { ResourceManager } from "../Framework/ResourceManager.js";
 import { GameEvent } from "../GameEvent/GameEvent.js";
 import { DummyScene } from "../Scene/DummyScene.js";
 import { Scene } from "../Scene/Scene.js";
@@ -55,6 +56,12 @@ export class Game
     static SetLanguage(language: Languages)
     {
         Game.instance.language = language;
+        ResourceManager.getLanguage(Game.instance.language); // Load the correct language's strings from JSON file
+    }
+
+    static Strings()
+    {
+        return ResourceManager.getLanguage(Game.instance.language);
     }
 
     private nextFrame()

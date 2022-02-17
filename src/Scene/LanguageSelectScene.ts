@@ -19,8 +19,8 @@ export class LanguageSelectScene extends Scene
 
         const enX = 168 - (this.SPACING/2);
         const jaX = 320 + (this.SPACING/2);
-        this.flagEN = new Flag(enX, 188, ResourceManager.getSprite("assets/spr/flag-us1.png"));
-        this.flagJA = new Flag(jaX, 188, ResourceManager.getSprite("assets/spr/flag-jp1.png"));
+        this.flagEN = new Flag(enX, 188, ResourceManager.getSprite("assets/spr/flag-us.png"));
+        this.flagJA = new Flag(jaX, 188, ResourceManager.getSprite("assets/spr/flag-jp.png"));
     }
     
     init() {}

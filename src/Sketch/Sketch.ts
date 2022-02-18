@@ -25,6 +25,7 @@ export abstract class Sketch {
         ResourceManager.getSprite("assets/spr/flag-us.png");
         ResourceManager.getSprite("assets/spr/textbox_topleft_4.png");
         ResourceManager.getSprite("assets/spr/textbox_topleft_3.png");
+        ResourceManager.getSprite("assets/spr/flag-gb-unused.png");
         ResourceManager.getSprite("assets/spr/krisu_2.png");
         ResourceManager.getSprite("assets/spr/krisl_0.png");
         ResourceManager.getSprite("assets/spr/textbox_topleft_1.png");
@@ -48,7 +49,8 @@ export abstract class Sketch {
         ResourceManager.getSound("assets/sfx/textsus.wav");
         ResourceManager.getSound("assets/sfx/spamton_laugh_noise.ogg");
         ResourceManager.getSound("assets/sfx/text.wav");
-        ResourceManager.getFont("assets/font/main.otf");
+        ResourceManager.getFont("assets/font/ja_main.ttf");
+        ResourceManager.getFont("assets/font/en_main.otf");
     }
 
     static setup(): void 

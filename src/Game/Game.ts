@@ -59,6 +59,11 @@ export class Game
         ResourceManager.getLanguage(Game.instance.language); // Load the correct language's strings from JSON file
     }
 
+    static GetLanguage(): Languages
+    {
+        return Game.instance.language;
+    }
+
     static Strings()
     {
         return ResourceManager.getLanguage(Game.instance.language);

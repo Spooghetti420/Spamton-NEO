@@ -11,7 +11,7 @@ import { Scene } from "./Scene.js";
 export class OverworldScene extends Scene 
 {
     private readonly rails: Rail[] = [];
-    private player = new Kris();
+    public readonly player = new Kris();
     private textbox: TextBox | null = null;
     init()
     {
@@ -33,8 +33,8 @@ export class OverworldScene extends Scene
         //     )
         // )
         Game.AddEvent(
-            AfterNFrames(50, ()=> {
-                this.textbox = new TextBox(100, 100);
+            AfterNFrames(4, ()=> {
+                this.textbox = new TextBox("* (There's a hole in the wall............)");
             })
         )
     }
@@ -53,13 +53,22 @@ export class OverworldScene extends Scene
         
         this.scroll();
         Background.draw();
-        for (let rail of this.rails) 
+        for (let rail of this.rails)
         {
             rail.draw();
         }
         this.player.update();
         this.player.draw();
         if (this.textbox)
+        {
+            this.textbox.update();
             this.textbox.draw();
+            if (this.textbox.IsComplete())
+            {
+                this.textbox = null;
+                this.player.canMove = true;
+                
+            }
+        }
     }
 }

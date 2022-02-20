@@ -81,6 +81,8 @@ export class Kris extends Sprite {
 
     private orientate(): void
     {
+        if (!this.canMove)
+            return;
         // Updates the player's direction and animation frame.
         const movement = this.makeMove();
 

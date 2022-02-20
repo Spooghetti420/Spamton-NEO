@@ -49,7 +49,7 @@ export abstract class Sketch {
         ResourceManager.getSound("assets/sfx/textsus.wav");
         ResourceManager.getSound("assets/sfx/spamton_laugh_noise.ogg");
         ResourceManager.getSound("assets/sfx/text.wav");
-        ResourceManager.getFont("assets/font/ja_main.ttf");
+        ResourceManager.getFont("assets/font/ja_main.woff");
         ResourceManager.getFont("assets/font/en_main.otf");
     }
 
@@ -58,6 +58,7 @@ export abstract class Sketch {
         Game.ChangeScene(new LanguageSelectScene());
         createCanvas(640, 480);
         frameRate(30);
+        noSmooth();
     }
 
     static draw(): void 

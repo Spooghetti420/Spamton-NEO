@@ -1,3 +1,4 @@
+import { Keys } from "../Framework/Enumarable/Keys.js";
 import { KeyboardManager } from "../Framework/KeyboardManager.js";
 import { ResourceManager } from "../Framework/ResourceManager.js";
 import { Text } from "../Framework/Text.js";
@@ -25,10 +26,10 @@ export class TextBox extends StaticSprite
 
     update()
     {
-        if (KeyboardManager.KeyIsHeld(CONTROL) || KeyboardManager.KeyIsPressed(88))
+        if (KeyboardManager.KeyIsHeld(Keys.C) || KeyboardManager.KeyIsPressed(Keys.X))
         {
             this.currentCharacter = this.str.length;
-            if (KeyboardManager.KeyIsHeld(CONTROL))
+            if (KeyboardManager.KeyIsHeld(Keys.C))
                 this.isComplete = true;
         }
 
@@ -38,7 +39,7 @@ export class TextBox extends StaticSprite
             ResourceManager.getSound("assets/sfx/text.wav").play();
         }
 
-        if (KeyboardManager.KeyIsPressed(90) && this.currentCharacter >= this.str.length)
+        if (KeyboardManager.KeyIsPressed(Keys.Z) && this.currentCharacter >= this.str.length)
         {
             this.isComplete = true;
         }

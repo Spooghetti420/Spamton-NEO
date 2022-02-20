@@ -1,5 +1,7 @@
+import { SoundFile } from "p5";
 import { Camera } from "../Framework/Camera.js";
-import { Game } from "../Game/Game.js";
+import { ResourceManager } from "../Framework/ResourceManager.js";
+import { debug, Game } from "../Game/Game.js";
 import { AfterNFrames, OnFrame } from "../GameEvent/FrameEvent.js";
 import { GameEvent } from "../GameEvent/GameEvent.js";
 import { Background } from "../Sprite/Background.js";
@@ -13,6 +15,7 @@ export class OverworldScene extends Scene
     private readonly rails: Rail[] = [];
     public readonly player = new Kris();
     private textbox: TextBox | null = null;
+    private playingMusic: SoundFile = ResourceManager.getSound("assets/mus/spamton_basement.ogg");
     init()
     {
         for (let i = 0; i < 2; i++) {
@@ -32,6 +35,11 @@ export class OverworldScene extends Scene
                 
         //     )
         // )
+        if (!debug)
+        {
+            this.playingMusic.loop();
+            this.playingMusic.play();
+        }
         Game.AddEvent(
             AfterNFrames(4, ()=> {
                 this.textbox = new TextBox("* (There's a hole in the wall............)");

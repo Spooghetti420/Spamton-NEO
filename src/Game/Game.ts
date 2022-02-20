@@ -6,6 +6,7 @@ import { GameEvent } from "../GameEvent/GameEvent.js";
 import { DummyScene } from "../Scene/DummyScene.js";
 import { Scene } from "../Scene/Scene.js";
 
+export const debug = true;
 export class Game 
 {
     private static instance: Game = new Game();

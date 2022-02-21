@@ -42,7 +42,7 @@ export class OverworldScene extends Scene
         }
         Game.AddEvent(
             AfterNFrames(4, ()=> {
-                this.textbox = new TextBox("* (There's a hole in the wall............)");
+                this.textbox = new TextBox("ちょっと冗談書いてみたね");
             })
         )
     }

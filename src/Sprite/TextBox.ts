@@ -22,7 +22,6 @@ export class TextBox extends StaticSprite
         this.str = str;
         this.currentCharacter = 0;
         this.isComplete = false;
-        (Game.CurrentScene() as OverworldScene).player.canMove = false;
     }
 
     update()

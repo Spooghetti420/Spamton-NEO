@@ -14,7 +14,7 @@ export class OverworldScene extends Scene
 {
     private readonly rails: Rail[] = [];
     public readonly player = new Kris();
-    private textbox: TextBox | null = null;
+    private textQueue: TextBox[] = [];
     private playingMusic: SoundFile = ResourceManager.getSound("assets/mus/spamton_basement.ogg");
     init()
     {
@@ -41,9 +41,11 @@ export class OverworldScene extends Scene
             this.playingMusic.play();
         }
         Game.AddEvent(
-            AfterNFrames(4, ()=> {
-                this.textbox = new TextBox("ちょっと冗談書いてみたね");
-            })
+            AfterNFrames(4, () => this.QueueText(
+                "＊ おお…　こ…これは…　 なんとも………　 キモチEEEEEEEEEEEEEEE…！！",
+                "駆けつけまレた　ｸﾘｽｻﾏ！！"
+                )
+            )
         )
     }
 
@@ -67,16 +69,28 @@ export class OverworldScene extends Scene
         }
         this.player.update();
         this.player.draw();
-        if (this.textbox)
+
+        // Draw any active textboxes
+        const textbox = this.textQueue[0];
+        if (textbox)
         {
-            this.textbox.update();
-            this.textbox.draw();
-            if (this.textbox.IsComplete())
+            textbox.update();
+            textbox.draw();
+            if (textbox.IsComplete())
             {
-                this.textbox = null;
-                this.player.canMove = true;
-                
+                this.textQueue.splice(0, 1);
+                if (this.textQueue.length === 0)
+                    this.player.canMove = true;
             }
+        }
+    }
+
+    public QueueText(...texts: string[])
+    {
+        this.player.canMove = false;
+        for (const str of texts)
+        {
+            this.textQueue.push(new TextBox(str));
         }
     }
 }

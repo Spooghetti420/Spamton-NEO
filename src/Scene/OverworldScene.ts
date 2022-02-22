@@ -40,12 +40,12 @@ export class OverworldScene extends Scene
             this.playingMusic.loop();
             this.playingMusic.play();
         }
-        Game.AddEvent(
-            AfterNFrames(4, () => this.QueueText(
-                "＊（かべに　穴があいている…）"
-                )
-            )
-        )
+        // Game.AddEvent(
+        //     AfterNFrames(4, () => this.QueueText(
+        //         "＊（かべに　穴があいている…）"
+        //         )
+        //     )
+        // )
     }
 
     private scroll(): void

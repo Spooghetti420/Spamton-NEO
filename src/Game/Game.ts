@@ -11,7 +11,7 @@ export const debug = true;
 export class Game 
 {
     private static instance: Game = new Game();
-    public static resolution: number = 3;
+    public static resolution: number = 5;
 
     private currentScene: Scene
     private frameCount: number
@@ -75,6 +75,11 @@ export class Game
 
     private nextFrame()
     {
+        if (KeyboardManager.KeyIsPressed(Keys.F4))
+        {
+            Game.resolution = ((Game.resolution) % 5) + 1
+            resizeCanvas(320 * Game.resolution, 240 * Game.resolution)
+        }
         this.currentScene.update();
         this.eventQueue.forEach(event => 
         {

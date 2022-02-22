@@ -54,7 +54,7 @@ export class TextBox extends StaticSprite
         const frame = Math.floor((Game.GetFrameCount() % 32) / 4);
         const cornerSprite = ResourceManager.getSprite(`assets/spr/textbox_topleft_${frame}.png`);
 
-        return
+        return // Temporarily out of service
 
         // White outline of the box
         fill(255);

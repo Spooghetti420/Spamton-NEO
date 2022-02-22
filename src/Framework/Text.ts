@@ -7,12 +7,17 @@ export class Text
     static Draw(str: string, x: number, y: number)
     {
         push();
-        textFont(ResourceManager.getFont(Text.GetCurrentFont()));
-        textAlign(LEFT, TOP)
-        textSize(26);
-        fill(255);
+        Text.SetFontProperties();
         text(str, x, y);
         pop();
+    }
+
+    private static SetFontProperties()
+    {
+        textFont(ResourceManager.getFont(Text.GetCurrentFont()));
+        textAlign(LEFT, TOP)
+        textSize(14 * Game.resolution);
+        fill(255);
     }
 
     private static GetCurrentFont(): string
@@ -25,10 +30,10 @@ export class Text
     {
         let size: number;
         push();
-        textFont(ResourceManager.getFont(Text.GetCurrentFont()));
-        textSize(27);
+        Text.SetFontProperties();
         size = textWidth(str);
         pop();
         return size;
     }
+
 }

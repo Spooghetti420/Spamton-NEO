@@ -40,12 +40,12 @@ export class OverworldScene extends Scene
             this.playingMusic.loop();
             this.playingMusic.play();
         }
-        // Game.AddEvent(
-        //     AfterNFrames(4, () => this.QueueText(
-        //         "＊（かべに　穴があいている…）"
-        //         )
-        //     )
-        // )
+        Game.AddEvent(
+            AfterNFrames(4, () => this.QueueText(
+                "* Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter    Deich."
+                )
+            )
+        )
     }
 
     private scroll(): void

@@ -11,7 +11,7 @@ export const debug = true;
 export class Game 
 {
     private static instance: Game = new Game();
-    public static resolution: number = 5;
+    public static resolution: number = 1;
 
     private currentScene: Scene
     private frameCount: number
@@ -85,7 +85,7 @@ export class Game
         {
             event.run();
             if (event.IsComplete())
-            this.eventQueue.splice(this.eventQueue.indexOf(event), 1);
+                this.eventQueue.splice(this.eventQueue.indexOf(event), 1);
         });
         this.frameCount++;
     }

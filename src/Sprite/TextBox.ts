@@ -14,12 +14,12 @@ export class TextBox extends StaticSprite
     private isComplete: boolean;
     private currentCharacter: number;
     private static readonly TEXT_BEGINNING: [number, number] = [29, 170];
-    private static readonly MAX_WIDTH: number = 267.3; // Maximum width of a single line of text
+    private static readonly MAX_WIDTH: number = 260; // Maximum width of a single line of text
     private static readonly WHITE_BORDER_SIZE: number = 3;
     private static readonly GRAY_BORDER_SIZE: number = 1;
     constructor(str: string)
     {
-        super(38, 326); // Bottom-of-the-screen text box
+        super(19, 163); // Bottom-of-the-screen text box
         this.str = str;
         this.currentCharacter = 0;
         this.isComplete = false;
@@ -54,7 +54,7 @@ export class TextBox extends StaticSprite
         const frame = Math.floor((Game.GetFrameCount() % 32) / 4);
         const cornerSprite = ResourceManager.getSprite(`assets/spr/textbox_topleft_${frame}.png`);
 
-        return // Temporarily out of service
+        // Temporarily out of service
 
         // White outline of the box
         fill(255);
@@ -75,15 +75,20 @@ export class TextBox extends StaticSprite
         // Shadow around the inner rim of the box
         fill("#9da2c4");
         rect(
-            this.x-TextBox.GRAY_BORDER_SIZE,
-            this.y-TextBox.GRAY_BORDER_SIZE,
-            301.5+TextBox.GRAY_BORDER_SIZE,
-            232.5+TextBox.GRAY_BORDER_SIZE
+            Game.resolution*(this.x-TextBox.GRAY_BORDER_SIZE),
+            Game.resolution*(this.y-TextBox.GRAY_BORDER_SIZE),
+            Game.resolution*(301.5+TextBox.GRAY_BORDER_SIZE),
+            Game.resolution*(232.5+TextBox.GRAY_BORDER_SIZE)
         );
 
         // Black interior of the box
         fill(0);
-        rect(this.x, this.y, 301.5, 232.5);
+        rect(
+            Game.resolution*this.x,
+            Game.resolution*this.y,
+            Game.resolution*301.5,
+            Game.resolution*232.5
+        );
         pop();
 
         
@@ -92,10 +97,25 @@ export class TextBox extends StaticSprite
         push();
         angleMode(DEGREES);
         imageMode(CENTER);
-        imageScaled(cornerSprite, this.x + TextBox.GRAY_BORDER_SIZE, this.y + TextBox.GRAY_BORDER_SIZE);
-        rotatedImage(cornerSprite, 603 - TextBox.GRAY_BORDER_SIZE, this.y + TextBox.GRAY_BORDER_SIZE, 90);
-        rotatedImage(cornerSprite, 603 - TextBox.GRAY_BORDER_SIZE, 465 - TextBox.GRAY_BORDER_SIZE, 180);
-        rotatedImage(cornerSprite, this.x + TextBox.GRAY_BORDER_SIZE, 465 - TextBox.GRAY_BORDER_SIZE, 270);
+        imageScaled(cornerSprite,
+            Game.resolution*(this.x + TextBox.GRAY_BORDER_SIZE),
+            Game.resolution*(this.y + TextBox.GRAY_BORDER_SIZE)
+        );
+        rotatedImage(cornerSprite,
+            Game.resolution*(301.5 - TextBox.GRAY_BORDER_SIZE),
+            Game.resolution*(this.y + TextBox.GRAY_BORDER_SIZE),
+            90
+        );
+        rotatedImage(cornerSprite,
+            Game.resolution*(301.5 - TextBox.GRAY_BORDER_SIZE),
+            Game.resolution*(232.5 - TextBox.GRAY_BORDER_SIZE),
+            180
+        );
+        rotatedImage(cornerSprite,
+            Game.resolution*(this.x + TextBox.GRAY_BORDER_SIZE),
+            Game.resolution*(232.5 - TextBox.GRAY_BORDER_SIZE),
+            270
+        );
         pop();
 
         // Implement wrapping behavior when text is too long to fit in the box
@@ -110,9 +130,9 @@ export class TextBox extends StaticSprite
                 j++;
             } while (this.StringPasses(s) && j <= this.currentCharacter && j <= this.str.length);
             s = this.str.slice(i, j);
-            Text.Draw(s, TextBox.TEXT_BEGINNING[0], TextBox.TEXT_BEGINNING[1] + h);
+            Text.Draw(s, Game.resolution*TextBox.TEXT_BEGINNING[0], Game.resolution*(TextBox.TEXT_BEGINNING[1] + h));
             i = j;
-            h += 30;
+            h += 18;
         } while (j < this.currentCharacter && j < this.str.length);
     }
 

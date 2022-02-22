@@ -1,6 +1,6 @@
 import * as p5 from "p5";
 import { Keys } from "../Framework/Enumarable/Keys.js";
-import { imageScaled, rotatedImage, scaleAll } from "../Framework/Extensions.js";
+import { imageScaled, rotatedImage } from "../Framework/Extensions.js";
 import { KeyboardManager } from "../Framework/KeyboardManager.js";
 import { ResourceManager } from "../Framework/ResourceManager.js";
 import { Text } from "../Framework/Text.js";
@@ -53,8 +53,6 @@ export class TextBox extends StaticSprite
         
         const frame = Math.floor((Game.GetFrameCount() % 32) / 4);
         const cornerSprite = ResourceManager.getSprite(`assets/spr/textbox_topleft_${frame}.png`);
-
-        // Temporarily out of service
 
         // White outline of the box
         fill(255);

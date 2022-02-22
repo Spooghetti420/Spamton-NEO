@@ -75,10 +75,14 @@ export class Game
 
     private nextFrame()
     {
-        if (KeyboardManager.KeyIsPressed(Keys.F4))
+        if (KeyboardManager.KeyIsPressed(Keys.MINUS) && Game.resolution > 1)
         {
-            Game.resolution = ((Game.resolution) % 5) + 1
-            resizeCanvas(320 * Game.resolution, 240 * Game.resolution)
+            Game.resolution--;
+            resizeCanvas(320 * Game.resolution, 240 * Game.resolution);
+        } else if (KeyboardManager.KeyIsPressed(Keys.EQUALS) && Game.resolution < 5)
+        {
+            Game.resolution++;
+            resizeCanvas(320 * Game.resolution, 240 * Game.resolution);
         }
         this.currentScene.update();
         this.eventQueue.forEach(event => 

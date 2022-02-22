@@ -1,7 +1,7 @@
 import * as p5 from "p5";
 import { Game } from "../Game/Game.js";
 
-// p5.js functions modified for use in the game.
+// p5.js functions modified for use in the game, and other globally useful custom functions.
 
 export function imageScaled(im: p5.Image, x: number, y: number, factor: number = 1): void
 {
@@ -19,11 +19,6 @@ export function rotatedImage(im: p5.Image, x: number, y: number, angle: number) 
     translate(-tx, -ty);
     imageScaled(im, x, y);
     pop();
-}
-
-export function scaleAll(...args: number[]): number[]
-{
-    return args.map(v => v * Game.resolution);
 }
 
 export function ToWorld(value: number): number

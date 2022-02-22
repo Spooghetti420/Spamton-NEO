@@ -12,7 +12,7 @@ export class TextBox extends StaticSprite
     private str: string;
     private isComplete: boolean;
     private currentCharacter: number;
-    private static readonly TEXT_BEGINNING: [number, number] = [58, 352];
+    private static readonly TEXT_BEGINNING: [number, number] = [58, 339];
     private static readonly MAX_WIDTH: number = 534.6; // Maximum width of a single line of text
     private static readonly WHITE_BORDER_SIZE: number = 6;
     private static readonly GRAY_BORDER_SIZE: number = 2;
@@ -49,11 +49,15 @@ export class TextBox extends StaticSprite
         push();
         rectMode(CORNERS);
         noStroke();
+        
+        const frame = Math.floor((Game.GetFrameCount() % 32) / 4);
+        const cornerSprite = ResourceManager.getSprite(`assets/spr/textbox_topleft_${frame}.png`);
 
         // White outline of the box
         fill(255);
-        rect(this.x-TextBox.WHITE_BORDER_SIZE, this.y-TextBox.WHITE_BORDER_SIZE, 603+TextBox.WHITE_BORDER_SIZE, 465+TextBox.WHITE_BORDER_SIZE);
-        
+        rect(this.x + cornerSprite.width/2, this.y-TextBox.WHITE_BORDER_SIZE, 603-cornerSprite.width/2, 465+TextBox.WHITE_BORDER_SIZE);
+        rect(this.x - TextBox.WHITE_BORDER_SIZE, this.y + cornerSprite.height/2, 603 + TextBox.WHITE_BORDER_SIZE, 465 - TextBox.WHITE_BORDER_SIZE);
+
         // Shadow around the inner rim of the box
         fill("#9da2c4");
         rect(this.x-TextBox.GRAY_BORDER_SIZE, this.y-TextBox.GRAY_BORDER_SIZE, 603+TextBox.GRAY_BORDER_SIZE, 465+TextBox.GRAY_BORDER_SIZE);
@@ -76,8 +80,6 @@ export class TextBox extends StaticSprite
         }
         
         // Draw corners
-        const frame = Math.floor((Game.GetFrameCount() % 32) / 4);
-        const cornerSprite = ResourceManager.getSprite(`assets/spr/textbox_topleft_${frame}.png`);
         push();
         angleMode(DEGREES);
         imageMode(CENTER);

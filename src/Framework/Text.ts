@@ -9,7 +9,7 @@ export class Text
         push();
         textFont(ResourceManager.getFont(Text.GetCurrentFont()));
         textAlign(LEFT, TOP)
-        textSize(27);
+        textSize(26);
         fill(255);
         text(str, x, y);
         pop();
@@ -17,7 +17,8 @@ export class Text
 
     private static GetCurrentFont(): string
     {
-        return `assets/font/${Game.GetLanguage()}_main.${Game.GetLanguage() === Languages.ENGLISH ? "otf" : "woff"}`;
+        const extension = (Game.GetLanguage() === Languages.ENGLISH) ? "otf" : "woff"
+        return `assets/font/${Game.GetLanguage()}_main.${extension}`;
     }
 
     static GetWidth(str: string): number

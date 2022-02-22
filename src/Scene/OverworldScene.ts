@@ -42,8 +42,7 @@ export class OverworldScene extends Scene
         }
         Game.AddEvent(
             AfterNFrames(4, () => this.QueueText(
-                "＊ おお…　こ…これは…　 なんとも………　 キモチEEEEEEEEEEEEEEE…！！",
-                "駆けつけまレた　ｸﾘｽｻﾏ！！"
+                "* (There's a hole in the wall...)"
                 )
             )
         )

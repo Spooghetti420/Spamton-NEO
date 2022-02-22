@@ -20,7 +20,7 @@ export class OverworldScene extends Scene
     {
         for (let i = 0; i < 2; i++) {
             for (let j = 0; j < 3; j++) {
-                this.rails.push(new Rail(640 * i, 180 + 60 * j));
+                this.rails.push(new Rail(320 * i, 90 + 30 * j));
             }
         }
         // Game.AddEvent(
@@ -42,7 +42,7 @@ export class OverworldScene extends Scene
         }
         Game.AddEvent(
             AfterNFrames(4, () => this.QueueText(
-                "* (There's a hole in the wall...)"
+                "＊（かべに　穴があいている…）"
                 )
             )
         )
@@ -50,9 +50,10 @@ export class OverworldScene extends Scene
 
     private scroll(): void
     {
+        // return;
         const scrollAmount = this.player.makeMove()[0]; // Get x value from player movement
 
-        if (this.player.x > 240 && this.player.x < 1020)
+        if (this.player.x > 120 && this.player.x < 510)
             this.camera.x += scrollAmount;
     }
     

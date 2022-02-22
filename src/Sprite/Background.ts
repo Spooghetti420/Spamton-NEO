@@ -1,12 +1,16 @@
+import { imageScaled } from "../Framework/Extensions.js";
 import { ResourceManager } from "../Framework/ResourceManager.js";
 import { Game } from "../Game/Game.js";
 import { StaticSprite } from "./StaticSprite.js";
 
 export class Background extends StaticSprite
 {
-    static draw() 
+    protected x = 0;
+    protected y = 40;
+    
+    static draw()
     {
-        const [relativeX, relativeY] = Game.CurrentScene().GetPositionRelativeToCamera(0, 80);
-        image(ResourceManager.getSprite("assets/spr/basement.png"), relativeX, relativeY);
+        const [relativeX, relativeY] = Game.CurrentScene().GetRelativeCanvasPosition(0, 40);
+        imageScaled(ResourceManager.getSprite("assets/spr/basement.png"), relativeX, relativeY);
     }
 }

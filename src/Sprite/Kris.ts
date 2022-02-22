@@ -1,4 +1,5 @@
 import { FacingDirection } from "../Framework/Enumarable/FacingDirection.js";
+import { imageScaled } from "../Framework/Extensions.js";
 import { KeyboardManager } from "../Framework/KeyboardManager.js";
 import { ResourceManager } from "../Framework/ResourceManager.js";
 import { Game } from "../Game/Game.js";
@@ -12,10 +13,10 @@ export class Kris extends Sprite {
     private facing: FacingDirection;
     private walkPhase: number;
     private walkAnimationTimer: number;
-    private static readonly BASE_SPEED = 4; // Initial speed without holding shift
-    private static readonly RUN_SPEED = 6; // Speed after holding shift
-    private static readonly SPRINT_SPEED = 7; // Speed after holding shift for 10 frames (1/3 second)
-    private static readonly MAX_SPEED = 8; // Speed after holding shift for 60 frames (2 seconds)
+    private static readonly BASE_SPEED = 2; // Initial speed without holding shift
+    private static readonly RUN_SPEED = 3; // Speed after holding shift
+    private static readonly SPRINT_SPEED = 3.5; // Speed after holding shift for 10 frames (1/3 second)
+    private static readonly MAX_SPEED = 4; // Speed after holding shift for 60 frames (2 seconds)
     private static readonly WALK_FRAMES = 6; // Number of frames before the walking animation changes
     private static readonly WALK_FRAMES_SPRINT = 4; // Same as above, but applied when sprinting
 
@@ -23,8 +24,8 @@ export class Kris extends Sprite {
     constructor() 
     {
         super();
-        this.x = 320;
-        this.y = 200;
+        this.x = 160;
+        this.y = 100;
         this.canMove = true;
         this.facing = FacingDirection.UP;
         this.walkPhase = 0;
@@ -57,9 +58,9 @@ export class Kris extends Sprite {
 
         if (KeyboardManager.KeyIsHeld(RIGHT_ARROW)) {
             dx = moveSpeed;
-            if (this.x + dx > 1240)
+            if (this.x + dx > 620)
                 // If the base speed is within bounds but the sprint is not, then move by the base speed instead. 
-                dx = (this.x + Kris.BASE_SPEED > 1240) ? 0 : Kris.BASE_SPEED;
+                dx = (this.x + Kris.BASE_SPEED > 620) ? 0 : Kris.BASE_SPEED;
         } else if (KeyboardManager.KeyIsHeld(LEFT_ARROW)) {
             dx = -moveSpeed;
             if (this.x + dx < 0)
@@ -68,12 +69,12 @@ export class Kris extends Sprite {
 
         if (KeyboardManager.KeyIsHeld(UP_ARROW)) {
             dy = -moveSpeed;
-            if (this.y + dy < 160)
-                dy = (this.y - Kris.BASE_SPEED < 160) ? 0 : -Kris.BASE_SPEED;
+            if (this.y + dy < 80)
+                dy = (this.y - Kris.BASE_SPEED < 80) ? 0 : -Kris.BASE_SPEED;
         } else if (KeyboardManager.KeyIsHeld(DOWN_ARROW)) {
             dy = moveSpeed;
-            if (this.y + dy > 320)
-                dy = (this.y + Kris.BASE_SPEED > 320) ? 0 : Kris.BASE_SPEED;
+            if (this.y + dy > 160)
+                dy = (this.y + Kris.BASE_SPEED > 160) ? 0 : Kris.BASE_SPEED;
         }
 
         return [dx, dy];
@@ -137,13 +138,12 @@ export class Kris extends Sprite {
     draw()
     {
 
-        const [relativeX, relativeY] = Game.CurrentScene()!.GetPositionRelativeToCamera(this.x, this.y);
 
         const spriteNumber = [0, 1, 0, 2][this.walkPhase];
 
-        image(
-            ResourceManager.getSprite("assets/spr/kris" + this.facing + "_" + spriteNumber + ".png")!,
-            relativeX, relativeY
-        );
+        imageScaled(
+            ResourceManager.getSprite("assets/spr/kris" + this.facing + "_" + spriteNumber + ".png"),
+            ...this.screenPosition()
+        )
     }
 }

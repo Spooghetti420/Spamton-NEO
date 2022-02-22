@@ -1,4 +1,6 @@
-import { Image } from "p5";
+import { Image, prototype } from "p5";
+import { imageScaled, WorldMousePos } from "../Framework/Extensions.js";
+import { Game } from "../Game/Game.js";
 import { StaticSprite } from "./StaticSprite.js";
 
 export class Flag extends StaticSprite
@@ -16,14 +18,16 @@ export class Flag extends StaticSprite
         push();
         if (this.IsBeingHoveredOver())
             tint(224);
-
-        image(this.image, this.x, this.y);
+        
+        const [relativeX, relativeY] = Game.CurrentScene().GetRelativeCanvasPosition(this.x, this.y);
+        imageScaled(this.image, relativeX, relativeY, 4);
         pop();
     }
 
     IsBeingHoveredOver(): boolean
     {
-        return (mouseX > this.x && mouseX < this.x + this.image.width
-            && mouseY > this.y && mouseY < this.y + this.image.height);
+        const [wMouseX, wMouseY] = WorldMousePos();
+        return (wMouseX > this.x && wMouseX < this.x + this.image.width * 4
+            && wMouseY > this.y && wMouseY < this.y + this.image.height * 4);
     }
 }

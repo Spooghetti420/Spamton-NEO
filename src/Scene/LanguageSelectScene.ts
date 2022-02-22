@@ -17,10 +17,10 @@ export class LanguageSelectScene extends Scene
     {
         super();
 
-        const enX = 168 - (this.SPACING/2);
-        const jaX = 320 + (this.SPACING/2);
-        this.flagEN = new Flag(enX, 188, ResourceManager.getSprite("assets/spr/flag-us.png"));
-        this.flagJA = new Flag(jaX, 188, ResourceManager.getSprite("assets/spr/flag-jp.png"));
+        const enX = 84 - (this.SPACING/4);
+        const jaX = 160 + (this.SPACING/4);
+        this.flagEN = new Flag(enX, 94, ResourceManager.getSprite("assets/spr/flag-us.png"));
+        this.flagJA = new Flag(jaX, 94, ResourceManager.getSprite("assets/spr/flag-jp.png"));
     }
     
     init() {}
@@ -42,6 +42,6 @@ export class LanguageSelectScene extends Scene
             }
         }
         else
-            cursor(ARROW);
+            cursor(ARROW)
     }
 }

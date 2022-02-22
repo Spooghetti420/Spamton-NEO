@@ -1,3 +1,4 @@
+import { Keys } from "../Framework/Enumarable/Keys.js";
 import { Languages } from "../Framework/Enumarable/Language.js";
 import { KeyboardManager } from "../Framework/KeyboardManager.js";
 import { MouseManager } from "../Framework/MouseManager.js";
@@ -10,11 +11,13 @@ export const debug = true;
 export class Game 
 {
     private static instance: Game = new Game();
+    public static resolution: number = 3;
 
     private currentScene: Scene
     private frameCount: number
     private eventQueue: GameEvent[] = [];
     private language: Languages = Languages.ENGLISH;
+
 
     private constructor() {
         this.currentScene = new DummyScene();
@@ -72,8 +75,6 @@ export class Game
 
     private nextFrame()
     {
-        if (!this.currentScene)
-            return
         this.currentScene.update();
         this.eventQueue.forEach(event => 
         {

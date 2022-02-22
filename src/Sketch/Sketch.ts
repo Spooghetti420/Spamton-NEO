@@ -1,3 +1,4 @@
+import { Keys } from "../Framework/Enumarable/Keys.js";
 import { ResourceManager } from "../Framework/ResourceManager.js";
 import { Game } from "../Game/Game.js";
 import { LanguageSelectScene } from "../Scene/LanguageSelectScene.js";
@@ -56,14 +57,19 @@ export abstract class Sketch {
     static setup(): void 
     {
         Game.ChangeScene(new LanguageSelectScene());
-        createCanvas(640, 480);
+        createCanvas(320 * Game.resolution, 240 * Game.resolution);
         frameRate(30);
-        noSmooth();
     }
 
     static draw(): void 
     {
+        noSmooth();
         Game.Update();
+    }
+
+    static keyPressed(): void
+    {
+
     }
 
 
